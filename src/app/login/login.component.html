@@ -6,10 +6,10 @@
         <form class="example-form" [formGroup]="loginForm">
             <mat-card-content>
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Username" formControlName="userName">
+                    <input matInput placeholder="Username" formControlName="loginId">
                 </mat-form-field>
                 <mat-form-field class="example-full-width">
-                    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password">
+                    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

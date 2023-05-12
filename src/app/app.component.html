@@ -1,1 +1,13 @@
-<app-login></app-login>
+<mat-toolbar color="primary" class="mat-elevation-z8">
+    <button mat-icon-button class="example-icon" aria-label="example icon button with movie icon">
+        <mat-icon>movie</mat-icon>
+    </button>
+    <span>Movie Booking Application</span>
+    <span class="example-spacer"></span>
+    <span class="nav-tool-items">
+        <a mat-button routerLink="login" routerLinkActive="active" style="margin-right: 10px;">Log in</a>
+        <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>
+    </span>
+</mat-toolbar>
+<router-outlet></router-outlet>
+<lib-ng-toast></lib-ng-toast>
