@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
 import { ApiService } from '../service/api.service';
+import { User } from '../model/User';
 
 @Component({
   selector: 'app-register',
@@ -10,6 +11,7 @@ import { ApiService } from '../service/api.service';
 })
 export class RegisterComponent implements OnInit {
   signupForm !: FormGroup
+  user !: User;
   constructor(private formBuilder: FormBuilder,
     private toastService: NgToastService,
     private apiService: ApiService) { }
@@ -25,6 +27,36 @@ export class RegisterComponent implements OnInit {
     })
   }
   doSignup() {
-
+    if (this.signupForm.valid) {
+      this.user = new User(this.signupForm.value.loginId, this.signupForm.value.firstName, this.signupForm.value.lastName, this.signupForm.value.emailId, this.signupForm.value.contactNumber, this.signupForm.value.password);
+      if (this.user.password != this.signupForm.value.matchPassword) {
+        this.toastService.warning({
+          detail: "Error",
+          summary: "Confirm password not matched",
+          duration: 3000
+        })
+      } else {
+        this.apiService.register(this.user).subscribe(
+          {
+            next: (res) => {
+              console.log(res);
+              this.toastService.success({
+                detail: "Registration Success",
+                summary: "User registered successfully",
+                duration: 3000
+              })
+            },
+            error: (res) => {
+              console.log(res);
+              this.toastService.warning({
+                detail: "Error",
+                summary: res.error.message,
+                duration: 3000
+              })
+            }
+          }
+        )
+      }
+    }
   }
 }
