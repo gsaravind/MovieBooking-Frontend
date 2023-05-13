@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { NgToastService } from 'ng-angular-popup';
 import { ApiService } from '../service/api.service';
 import { User } from '../model/User';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-register',
@@ -14,8 +16,13 @@ export class RegisterComponent implements OnInit {
   user !: User;
   constructor(private formBuilder: FormBuilder,
     private toastService: NgToastService,
-    private apiService: ApiService) { }
+    private apiService: ApiService,
+    private router: Router,
+    private cookieService: CookieService) { }
   ngOnInit(): void {
+    if(this.cookieService.get("loggedIn") == "Yes"){
+      this.router.navigate(['/dashboard']);
+    }
     this.signupForm = this.formBuilder.group({
       loginId: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
       firstName: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]),
@@ -40,6 +47,7 @@ export class RegisterComponent implements OnInit {
           {
             next: (res) => {
               console.log(res);
+
               this.toastService.success({
                 detail: "Registration Success",
                 summary: "User registered successfully",

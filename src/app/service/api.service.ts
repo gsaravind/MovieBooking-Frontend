@@ -13,4 +13,7 @@ export class ApiService {
   register(user: User){
     return this.http.post<any>("http://localhost:8081/api/v1.0/moviebooking/register", user);
   }
+  getAllMovies(){
+    return this.http.get<any>("http://localhost:8081/api/v1.0/moviebooking/all");
+  }
 }

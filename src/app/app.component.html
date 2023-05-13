@@ -2,11 +2,16 @@
     <button mat-icon-button class="example-icon" aria-label="example icon button with movie icon">
         <mat-icon>movie</mat-icon>
     </button>
-    <span>Movie Booking Application</span>
+    <span><a mat-button routerLink="dashboard"> Movie Booking Application </a></span>
     <span class="example-spacer"></span>
     <span class="nav-tool-items">
-        <a mat-button routerLink="login" routerLinkActive="active" style="margin-right: 10px;">Log in</a>
-        <a mat-button routerLink="register" routerLinkActive="active">Register</a>
+        <span *ngIf="this.cookieService.get('loggedIn') == 'Yes'" style="margin-left: 10px;">Hey! {{
+            this.cookieService.get("firstName") }} </span>
+        <a mat-button *ngIf="this.cookieService.get('loggedIn') == 'Yes'" (click)="doLogout()">Logout</a>
+        <a *ngIf="this.cookieService.get('loggedIn') != 'Yes'" mat-button routerLink="login" routerLinkActive="active"
+            style="margin-right: 10px;">Log in</a>
+        <a *ngIf="this.cookieService.get('loggedIn') != 'Yes'" mat-button routerLink="register"
+            routerLinkActive="active">Register</a>
     </span>
 </mat-toolbar>
 <router-outlet></router-outlet>
