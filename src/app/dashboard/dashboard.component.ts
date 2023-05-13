@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { Movie } from '../model/Movie';
 import { NgToastService } from 'ng-angular-popup';
+import { MatDialog } from '@angular/material/dialog';
+import { AddTicketDialogComponent } from '../dialog/add-ticket-dialog/add-ticket-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit{
-  constructor(private apiService: ApiService, 
-    private toastService: NgToastService) { }
+export class DashboardComponent implements OnInit {
+  constructor(private apiService: ApiService,
+    private toastService: NgToastService,
+    private dialog: MatDialog) { }
   ngOnInit(): void {
     this.movies = [];
-    if(this.loaded == false){
+    if (this.loaded == false) {
       this.loaded = true;
       this.getAllMovies();
     }
@@ -21,8 +24,8 @@ export class DashboardComponent implements OnInit{
   movies!: Movie[];
   loaded: boolean = false;
 
-  searchBykeyword(searchKeyword: string){
-    if(searchKeyword == "") {
+  searchBykeyword(searchKeyword: string) {
+    if (searchKeyword == "") {
       this.getAllMovies();
       return;
     }
@@ -31,12 +34,12 @@ export class DashboardComponent implements OnInit{
       next: (res) => {
         console.log(res);
         this.movies = [];
-        res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; }) => 
+        res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; }) =>
           this.movies.push(
             new Movie(ele.movieIdentity.movieName, ele.movieIdentity.theatreName, ele.noOfTickets)
-            )
-          );
-          this.loaded = false;
+          )
+        );
+        this.loaded = false;
       },
       error: (res) => {
         this.toastService.warning({
@@ -47,21 +50,27 @@ export class DashboardComponent implements OnInit{
       }
     })
   }
-  getAllMovies(){
+  getAllMovies() {
     this.apiService.getAllMovies().subscribe({
       next: (res) => {
         this.movies = []
         console.log(res);
-        res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; }) => 
+        res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; }) =>
           this.movies.push(
             new Movie(ele.movieIdentity.movieName, ele.movieIdentity.theatreName, ele.noOfTickets)
-            )
-          );
-          console.log(this.movies)
+          )
+        );
+        console.log(this.movies)
       },
       error: (res) => {
         console.log(res)
       }
+    })
+  }
+  openAddTickets(val: Movie) {
+    this.dialog.open(AddTicketDialogComponent, {
+      width: '35%',
+      data: val
     })
   }
 }

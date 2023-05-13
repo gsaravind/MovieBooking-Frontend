@@ -17,7 +17,9 @@ import { NgToastModule } from 'ng-angular-popup';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddTicketDialogComponent } from './dialog/add-ticket-dialog/add-ticket-dialog.component';
-
+import { MatDialogModule } from '@angular/material/dialog'
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,10 @@ import { AddTicketDialogComponent } from './dialog/add-ticket-dialog/add-ticket-
     ReactiveFormsModule,
     MatToolbarModule,
     HttpClientModule,
-    NgToastModule
+    NgToastModule,
+    MatDialogModule,
+    MatChipsModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

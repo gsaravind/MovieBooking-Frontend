@@ -17,7 +17,7 @@
             Available Tickets: {{ i.noOfTickets }}
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="accent">Book Tickets</button>
+            <button mat-raised-button color="accent" (click)="openAddTickets(i)">Book Tickets</button>
         </mat-card-actions>
     </mat-card>
 </div>
