@@ -1,10 +1,9 @@
-<button mat-raised-button (click)="getAllMovies()">Click me</button>
 <div style="display: flex; justify-content: center;">
     <mat-form-field style="width: 76%; margin-top: 15px;">
         <mat-label>Search any Movie</mat-label>
         <input matInput #searchKeyword 
-        (keyup)="searchBykeyword(searchKeyword.value)"
-        placeholder="Movie name">
+        placeholder="Movie name" (keyup)="searchBykeyword(searchKeyword.value)">
+        <button mat-icon-button matSuffix (click)="searchBykeyword(searchKeyword.value)"><mat-icon>search</mat-icon></button>
     </mat-form-field>
 </div>
 <div class="container">

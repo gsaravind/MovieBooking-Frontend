@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../model/User';
+import { Movie } from '../model/Movie';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,5 +16,8 @@ export class ApiService {
   }
   getAllMovies(){
     return this.http.get<any>("http://localhost:8081/api/v1.0/moviebooking/all");
+  }
+  searchMovie(searchKeyword: string) {
+    return this.http.get<Movie[]>("http://localhost:8081/api/v1.0/moviebooking/movies/search/"+searchKeyword);
   }
 }

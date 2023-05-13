@@ -16,13 +16,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgToastModule } from 'ng-angular-popup';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AddTicketDialogComponent } from './dialog/add-ticket-dialog/add-ticket-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    AddTicketDialogComponent
   ],
   imports: [
     BrowserModule,
