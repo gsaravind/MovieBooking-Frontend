@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Book Tickets</h2>
 <mat-dialog-content class="mat-typography">
-  <h3>Movie: {{ this.movie.movieIdentity.movieName }}</h3>
+  <h3>Movie Name: {{ this.movie.movieIdentity.movieName }}</h3>
   <h3>Theatre Name: {{ this.movie.movieIdentity.theatreName }}</h3>
   <h3>No. of seats available: {{ this.movie.noOfTickets }}</h3>
   <div class="container-main">
@@ -22,12 +22,13 @@
       <div class="screen"></div>
 
       <div class="row" *ngFor="let row of this.seats">
-        <div class="seat" *ngFor="let col of row"></div>
+        <div class="seat" *ngFor="let col of row" id="{{col}}" (click)="toggleSeat($event)"></div>
       </div>
     </div>
 
     <p class="text">
-      You have selected <span id="count">0</span> seat for a price of RS.<span id="total">0</span>
+      You have selected <span id="count"> {{ this.totSelectedSeats }} </span> seat for a price of RS.<span id="total">
+        {{ this.totPrice }} </span>
     </p>
   </div>
 
@@ -36,5 +37,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Add Tickets</button>
+  <button mat-button cdkFocusInitial (click)="addMovieTickets()">Add Tickets</button>
 </mat-dialog-actions>
