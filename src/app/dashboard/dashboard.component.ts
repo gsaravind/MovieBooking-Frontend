@@ -4,6 +4,7 @@ import { Movie } from '../model/Movie';
 import { NgToastService } from 'ng-angular-popup';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTicketDialogComponent } from '../dialog/add-ticket-dialog/add-ticket-dialog.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,8 +14,12 @@ import { AddTicketDialogComponent } from '../dialog/add-ticket-dialog/add-ticket
 export class DashboardComponent implements OnInit {
   constructor(private apiService: ApiService,
     private toastService: NgToastService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    public cookieService: CookieService) { }
   ngOnInit(): void {
+    if(this.cookieService.get('loggedIn') == 'Yes'){
+      this.disabledBuyTicket = false
+    }
     this.movies = [];
     if (this.loaded == false) {
       this.loaded = true;
@@ -23,6 +28,7 @@ export class DashboardComponent implements OnInit {
   }
   movies!: Movie[];
   loaded: boolean = false;
+  disabledBuyTicket: boolean = true;
 
   searchBykeyword(searchKeyword: string) {
     if (searchKeyword == "") {

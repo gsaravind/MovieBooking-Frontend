@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  hide: boolean = false;
+  hide: boolean = true;
   loginForm!: FormGroup
   constructor(private formBuilder: FormBuilder,
     private apiService: ApiService,

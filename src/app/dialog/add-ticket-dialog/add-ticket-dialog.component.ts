@@ -57,7 +57,25 @@ export class AddTicketDialogComponent implements OnInit {
   addMovieTickets() {
     if (this.totSelectedSeats > 0) {
       const ticketPojo = new NewTicketsPojo(this.movie.movieIdentity.movieName, this.movie.movieIdentity.theatreName, this.totSelectedSeats, this.totSelectedSeatsID);
-      console.log(ticketPojo)
+      this.apiService.addMovieTickets(ticketPojo).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.toastService.success({
+            detail: "Success",
+            summary: res.message,
+            duration: 3000
+          })
+        }, error: (res) => {
+          console.log(res.status);
+          if(res.status == 498) {
+            this.toastService.warning({
+              detail: "Error",
+              summary: "Please login to book tickets",
+              duration: 3000
+            })
+          }
+        }
+      })
     } else {
       this.toastService.warning({
         detail: "Error",
