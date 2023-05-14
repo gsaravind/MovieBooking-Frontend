@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 import { NgToastService } from 'ng-angular-popup';
@@ -10,7 +10,7 @@ import { NewTicketsPojo } from 'src/app/model/NewTicketsPojo';
   templateUrl: './add-ticket-dialog.component.html',
   styleUrls: ['./add-ticket-dialog.component.css']
 })
-export class AddTicketDialogComponent implements OnInit {
+export class AddTicketDialogComponent implements OnInit, AfterViewInit {
   addTicketsForm !: FormGroup
   actionBtn: string = "Save";
   movie!: Movie;
@@ -23,6 +23,14 @@ export class AddTicketDialogComponent implements OnInit {
     private toastService: NgToastService,
     private dialogRef: MatDialogRef<AddTicketDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public addTickets: any) { }
+  ngAfterViewInit(): void {
+    if(this.addTickets) {
+      this.movie.bookedSeats.forEach(ele => {
+        document.getElementById(ele)?.classList.toggle("sold");
+        console.log(ele);
+      });
+    }
+  }
   ngOnInit(): void {
     this.seats = []
     this.totSelectedSeatsID = []
@@ -34,9 +42,17 @@ export class AddTicketDialogComponent implements OnInit {
     this.seats.push(['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']);
     if (this.addTickets) {
       this.movie = this.addTickets;
+      console.log(this.movie)
+      if(this.movie.bookedSeats != undefined) {
+        this.movie.bookedSeats.forEach(ele => {
+          document.getElementById(ele)?.classList.toggle("sold");
+          console.log(ele);
+        });
+      }
     }
     this.totSelectedSeats = 0;
   }
+
   toggleSeat(e: any) {
     if (
       e.target.classList.contains("seat") &&

@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
     private dialog: MatDialog,
     public cookieService: CookieService) { }
   ngOnInit(): void {
-    if(this.cookieService.get('loggedIn') == 'Yes'){
+    if (this.cookieService.get('loggedIn') == 'Yes') {
       this.disabledBuyTicket = false
     }
     this.movies = [];
@@ -40,9 +40,9 @@ export class DashboardComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.movies = [];
-        res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; }) =>
+        res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; bookedSeats: string[]; }) =>
           this.movies.push(
-            new Movie(ele.movieIdentity.movieName, ele.movieIdentity.theatreName, ele.noOfTickets)
+            new Movie(ele.movieIdentity.movieName, ele.movieIdentity.theatreName, ele.noOfTickets, ele.bookedSeats)
           )
         );
         this.loaded = false;
@@ -61,9 +61,9 @@ export class DashboardComponent implements OnInit {
       next: (res) => {
         this.movies = []
         console.log(res);
-        res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; }) =>
+        res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; bookedSeats: string[]; }) =>
           this.movies.push(
-            new Movie(ele.movieIdentity.movieName, ele.movieIdentity.theatreName, ele.noOfTickets)
+            new Movie(ele.movieIdentity.movieName, ele.movieIdentity.theatreName, ele.noOfTickets, ele.bookedSeats)
           )
         );
         console.log(this.movies)

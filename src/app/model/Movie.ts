@@ -1,4 +1,4 @@
-class MovieIdentity{
+class MovieIdentity {
     movieName!: string
     theatreName!: string;
     constructor(movieName: string, theatreName: string) {
@@ -6,11 +6,13 @@ class MovieIdentity{
         this.theatreName = theatreName;
     }
 }
-export class Movie{
+export class Movie {
     movieIdentity!: MovieIdentity;
     noOfTickets!: number;
-    constructor(movieName: string, theatreName: string, noOfTickets: number){
+    bookedSeats!: string[];
+    constructor(movieName: string, theatreName: string, noOfTickets: number, bookedSeats: string[]) {
         this.movieIdentity = new MovieIdentity(movieName, theatreName);
         this.noOfTickets = noOfTickets;
+        this.bookedSeats = bookedSeats;
     }
 }
