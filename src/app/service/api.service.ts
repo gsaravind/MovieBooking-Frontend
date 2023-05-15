@@ -41,7 +41,7 @@ export class ApiService {
     const httpOptions = {
       headers: headersOb
     };
-    return this.http.post<any>("http://localhost:8081/api/v1.0/moviebooking/admin", httpOptions);
+    return this.http.get<any>("http://localhost:8081/api/v1.0/moviebooking/admin", httpOptions);
   }
   authenticateUser() {
     const headersOb = new HttpHeaders({
@@ -51,6 +51,6 @@ export class ApiService {
     const httpOptions = {
       headers: headersOb
     };
-    return this.http.post<any>("http://localhost:8081/api/v1.0/moviebooking/user", httpOptions);
+    return this.http.get<any>("http://localhost:8081/api/v1.0/moviebooking/user", httpOptions);
   }
 }

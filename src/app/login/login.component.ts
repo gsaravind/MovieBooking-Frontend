@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router) { }
   ngOnInit(): void {
-    if(this.cookieService.get("loggedIn") == "Yes") {
+    if (this.cookieService.get("loggedIn") == "Yes") {
       this.router.navigate(['/dashboard'])
     }
     this.loginForm = this.formBuilder.group({
@@ -41,6 +41,22 @@ export class LoginComponent implements OnInit {
             this.cookieService.set("contactNumber", res.contactNumber)
             this.cookieService.set("lastName", res.lastName);
             this.cookieService.set("loggedIn", "Yes");
+            this.apiService.authenticateAdmin().subscribe({
+              next: (res) =>  {
+                this.cookieService.set("usertype", "admin")
+                console.log("admin")
+              },
+              error: (res) => {
+                console.log("Cant reach here as admin")
+                this.apiService.authenticateUser().subscribe({
+                  next: (res) => { 
+                    this.cookieService.set("admin", "user")
+                    console.log("user")
+                  },
+                  error: (res) => console.log("Cant reach here as user")
+                })
+              }
+            })
             this.router.navigate(['/dashboard'])
             this.toastService.success({
               detail: "Login Success",

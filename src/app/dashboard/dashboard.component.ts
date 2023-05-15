@@ -5,6 +5,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTicketDialogComponent } from '../dialog/add-ticket-dialog/add-ticket-dialog.component';
 import { CookieService } from 'ngx-cookie-service';
+import { ConfirmPopupComponent } from '../dialog/confirm-popup/confirm-popup.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -78,6 +79,12 @@ export class DashboardComponent implements OnInit {
           this.getAllMovies();
         }
       }
+    })
+  }
+  updateTicketStatus(val: Movie) {
+    this.dialog.open(ConfirmPopupComponent, {
+      width: '35%',
+      data: val
     })
   }
 }

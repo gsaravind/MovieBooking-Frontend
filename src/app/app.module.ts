@@ -20,13 +20,15 @@ import { AddTicketDialogComponent } from './dialog/add-ticket-dialog/add-ticket-
 import { MatDialogModule } from '@angular/material/dialog'
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { ConfirmPopupComponent } from './dialog/confirm-popup/confirm-popup.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    AddTicketDialogComponent
+    AddTicketDialogComponent,
+    ConfirmPopupComponent
   ],
   imports: [
     BrowserModule,

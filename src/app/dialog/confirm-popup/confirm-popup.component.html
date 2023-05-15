@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Update Ticket Status</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Movie Name: {{ this.movie.movieIdentity.movieName }}</h3>
+  <h3>Theatre Name: {{ this.movie.movieIdentity.theatreName }}</h3>
+  <h3>Seats booked: {{ this.movie.bookedSeats }}</h3>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-stroked-button [mat-dialog-close]="true" cdkFocusInitial color="accent">Update Status</button>
+</mat-dialog-actions>
