@@ -14,10 +14,10 @@
         </mat-card-header>
         <img mat-card-image src="https://cdn.pixabay.com/photo/2017/11/24/10/43/ticket-2974645_1280.jpg">
         <mat-card-content>
-            Available Tickets: {{ i.noOfTickets }}
+            Available Tickets: {{ i.noOfTickets }} {{i.noOfTickets > 0 ? "Book now" : "Sold"}}
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="accent" (click)="openAddTickets(i)"  [disabled]="this.cookieService.get('loggedIn') != 'Yes'">Book Tickets</button>
+            <button mat-raised-button color="accent" (click)="openAddTickets(i)"  [disabled]="i.noOfTickets == 0 || this.cookieService.get('loggedIn') != 'Yes'">Book Tickets</button>
         </mat-card-actions>
     </mat-card>
 </div>

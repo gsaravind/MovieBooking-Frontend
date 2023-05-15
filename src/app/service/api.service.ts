@@ -27,10 +27,30 @@ export class ApiService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.cookieService.get("jwtToken")
     });
-   
+
     const httpOptions = {
       headers: headersOb
     };
     return this.http.post<any>("http://localhost:8081/api/v1.0/moviebooking/" + ticketPojo.movieName + "/add", ticketPojo, httpOptions);
+  }
+  authenticateAdmin() {
+    const headersOb = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.cookieService.get("jwtToken")
+    });
+
+    const httpOptions = {
+      headers: headersOb
+    };
+    return this.http.post<any>("http://localhost:8081/api/v1.0/moviebooking/admin", httpOptions);
+  }
+  authenticateUser() {
+    const headersOb = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.cookieService.get("jwtToken")
+    });
+
+    const httpOptions = {
+      headers: headersOb
+    };
+    return this.http.post<any>("http://localhost:8081/api/v1.0/moviebooking/user", httpOptions);
   }
 }

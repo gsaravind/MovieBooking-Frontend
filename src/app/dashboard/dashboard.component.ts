@@ -35,10 +35,8 @@ export class DashboardComponent implements OnInit {
       this.getAllMovies();
       return;
     }
-    console.log(searchKeyword)
     this.apiService.searchMovie(searchKeyword).subscribe({
       next: (res) => {
-        console.log(res);
         this.movies = [];
         res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; bookedSeats: string[]; }) =>
           this.movies.push(
@@ -60,16 +58,13 @@ export class DashboardComponent implements OnInit {
     this.apiService.getAllMovies().subscribe({
       next: (res) => {
         this.movies = []
-        console.log(res);
         res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; bookedSeats: string[]; }) =>
           this.movies.push(
             new Movie(ele.movieIdentity.movieName, ele.movieIdentity.theatreName, ele.noOfTickets, ele.bookedSeats)
           )
         );
-        console.log(this.movies)
       },
       error: (res) => {
-        console.log(res)
       }
     })
   }
@@ -77,6 +72,12 @@ export class DashboardComponent implements OnInit {
     this.dialog.open(AddTicketDialogComponent, {
       width: '35%',
       data: val
+    }).afterClosed().subscribe({
+      next: (res) => {
+        if (res == "added") {
+          this.getAllMovies();
+        }
+      }
     })
   }
 }

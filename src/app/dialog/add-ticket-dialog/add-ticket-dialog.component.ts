@@ -27,7 +27,6 @@ export class AddTicketDialogComponent implements OnInit, AfterViewInit {
     if(this.addTickets) {
       this.movie.bookedSeats.forEach(ele => {
         document.getElementById(ele)?.classList.toggle("sold");
-        console.log(ele);
       });
     }
   }
@@ -42,11 +41,9 @@ export class AddTicketDialogComponent implements OnInit, AfterViewInit {
     this.seats.push(['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']);
     if (this.addTickets) {
       this.movie = this.addTickets;
-      console.log(this.movie)
       if(this.movie.bookedSeats != undefined) {
         this.movie.bookedSeats.forEach(ele => {
           document.getElementById(ele)?.classList.toggle("sold");
-          console.log(ele);
         });
       }
     }
@@ -75,14 +72,13 @@ export class AddTicketDialogComponent implements OnInit, AfterViewInit {
       const ticketPojo = new NewTicketsPojo(this.movie.movieIdentity.movieName, this.movie.movieIdentity.theatreName, this.totSelectedSeats, this.totSelectedSeatsID);
       this.apiService.addMovieTickets(ticketPojo).subscribe({
         next: (res) => {
-          console.log(res);
           this.toastService.success({
             detail: "Success",
             summary: res.message,
             duration: 3000
           })
+          this.dialogRef.close("added");
         }, error: (res) => {
-          console.log(res.status);
           if(res.status == 498) {
             this.toastService.warning({
               detail: "Error",
