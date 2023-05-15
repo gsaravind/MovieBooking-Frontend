@@ -39,9 +39,9 @@ export class DashboardComponent implements OnInit {
     this.apiService.searchMovie(searchKeyword).subscribe({
       next: (res) => {
         this.movies = [];
-        res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; bookedSeats: string[]; }) =>
+        res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; bookedSeats: string[]; statusUpdated: boolean}) =>
           this.movies.push(
-            new Movie(ele.movieIdentity.movieName, ele.movieIdentity.theatreName, ele.noOfTickets, ele.bookedSeats)
+            new Movie(ele.movieIdentity.movieName, ele.movieIdentity.theatreName, ele.noOfTickets, ele.bookedSeats, ele.statusUpdated)
           )
         );
         this.loaded = false;
@@ -59,11 +59,12 @@ export class DashboardComponent implements OnInit {
     this.apiService.getAllMovies().subscribe({
       next: (res) => {
         this.movies = []
-        res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; bookedSeats: string[]; }) =>
+        res.forEach((ele: { movieIdentity: { movieName: string; theatreName: string; }; noOfTickets: number; bookedSeats: string[]; statusUpdated: boolean}) =>
           this.movies.push(
-            new Movie(ele.movieIdentity.movieName, ele.movieIdentity.theatreName, ele.noOfTickets, ele.bookedSeats)
+            new Movie(ele.movieIdentity.movieName, ele.movieIdentity.theatreName, ele.noOfTickets, ele.bookedSeats, ele.statusUpdated)
           )
         );
+        console.log(res);
       },
       error: (res) => {
       }
@@ -85,6 +86,12 @@ export class DashboardComponent implements OnInit {
     this.dialog.open(ConfirmPopupComponent, {
       width: '35%',
       data: val
+    }).afterClosed().subscribe({
+      next: (res) => {
+        if(res == "done") {
+          this.getAllMovies();
+        }
+      }
     })
   }
 }

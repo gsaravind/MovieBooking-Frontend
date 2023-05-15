@@ -20,7 +20,7 @@ export class ApiService {
     return this.http.get<any>("http://localhost:8081/api/v1.0/moviebooking/all");
   }
   searchMovie(searchKeyword: string) {
-    return this.http.get<Movie[]>("http://localhost:8081/api/v1.0/moviebooking/movies/search/" + searchKeyword);
+    return this.http.get<any>("http://localhost:8081/api/v1.0/moviebooking/movies/search/" + searchKeyword);
   }
   addMovieTickets(ticketPojo: NewTicketsPojo) {
     const headersOb = new HttpHeaders({
@@ -52,5 +52,16 @@ export class ApiService {
       headers: headersOb
     };
     return this.http.get<any>("http://localhost:8081/api/v1.0/moviebooking/user", httpOptions);
+  }
+  updateTicketStatus(data: Movie) {
+    const headersOb = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.cookieService.get("jwtToken")
+    });
+
+    const httpOptions = {
+      headers: headersOb
+    };
+    const pojo = new NewTicketsPojo(data.movieIdentity.movieName, data.movieIdentity.theatreName, 0, data.bookedSeats);
+    return this.http.put<any>("http://localhost:8081/api/v1.0/moviebooking/" + data.movieIdentity.movieName + "/update", pojo, httpOptions);
   }
 }

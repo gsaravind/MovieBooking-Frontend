@@ -18,7 +18,7 @@
         </mat-card-content>
         <mat-card-actions>
             <button mat-raised-button color="accent" (click)="openAddTickets(i)"   *ngIf="this.cookieService.get('usertype') != 'admin'" [disabled]="i.noOfTickets == 0 || this.cookieService.get('loggedIn') != 'Yes'">Book Tickets</button>
-            <button mat-raised-button color="primary" (click)="updateTicketStatus(i)"  *ngIf="this.cookieService.get('usertype') == 'admin'" [disabled]="i.bookedSeats == undefined">Update Ticket Status</button>
+            <button mat-raised-button color="primary" (click)="updateTicketStatus(i)"  *ngIf="this.cookieService.get('usertype') == 'admin'" [disabled]="i.isStatusUpdated == true">Update Ticket Status</button>
         </mat-card-actions>
     </mat-card>
 </div>
