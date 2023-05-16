@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,9 +18,9 @@ import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddTicketDialogComponent } from './dialog/add-ticket-dialog/add-ticket-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog'
-import {MatChipsModule} from '@angular/material/chips';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ConfirmPopupComponent } from './dialog/confirm-popup/confirm-popup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AddMovieComponent } from './dialog/add-movie/add-movie.component';
@@ -56,6 +56,7 @@ import { AddMovieComponent } from './dialog/add-movie/add-movie.component';
     MatStepperModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
