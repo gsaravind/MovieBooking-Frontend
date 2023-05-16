@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 import { NgToastService } from 'ng-angular-popup';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -18,8 +18,7 @@ export class AddTicketDialogComponent implements OnInit, AfterViewInit {
   totPrice!: number;
   totSelectedSeats!: number;
   totSelectedSeatsID!: string[];
-  constructor(private formBuilder: FormBuilder,
-    private apiService: ApiService,
+  constructor(private apiService: ApiService,
     private toastService: NgToastService,
     private dialogRef: MatDialogRef<AddTicketDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public addTickets: any) { }

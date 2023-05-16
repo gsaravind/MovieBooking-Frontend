@@ -64,4 +64,7 @@ export class ApiService {
     const pojo = new NewTicketsPojo(data.movieIdentity.movieName, data.movieIdentity.theatreName, 0, data.bookedSeats);
     return this.http.put<any>("http://localhost:8081/api/v1.0/moviebooking/" + data.movieIdentity.movieName + "/update", pojo, httpOptions);
   }
+  forgotPassword(data: User) {
+    return this.http.post<any>("http://localhost:8081/api/v1.0/moviebooking/forgot/" + data.loginId, data);
+  }
 }

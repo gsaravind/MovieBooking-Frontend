@@ -19,8 +19,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddTicketDialogComponent } from './dialog/add-ticket-dialog/add-ticket-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog'
 import {MatChipsModule} from '@angular/material/chips';
+import {MatStepperModule} from '@angular/material/stepper';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ConfirmPopupComponent } from './dialog/confirm-popup/confirm-popup.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,8 @@ import { ConfirmPopupComponent } from './dialog/confirm-popup/confirm-popup.comp
     RegisterComponent,
     DashboardComponent,
     AddTicketDialogComponent,
-    ConfirmPopupComponent
+    ConfirmPopupComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { ConfirmPopupComponent } from './dialog/confirm-popup/confirm-popup.comp
     NgToastModule,
     MatDialogModule,
     MatChipsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [AppComponent]
