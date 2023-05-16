@@ -9,18 +9,18 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ApiService {
   constructor(private http: HttpClient, private cookieService: CookieService) { }
-
+  apiEndPoint: string = "http://localhost:8081/api/v1.0/moviebooking/";
   login(data: any) {
-    return this.http.post<any>("http://localhost:8081/api/v1.0/moviebooking/login", data);
+    return this.http.post<any>(this.apiEndPoint + "login", data);
   }
   register(user: User) {
-    return this.http.post<any>("http://localhost:8081/api/v1.0/moviebooking/register", user);
+    return this.http.post<any>(this.apiEndPoint + "register", user);
   }
   getAllMovies() {
-    return this.http.get<any>("http://localhost:8081/api/v1.0/moviebooking/all");
+    return this.http.get<any>(this.apiEndPoint + "all");
   }
   searchMovie(searchKeyword: string) {
-    return this.http.get<any>("http://localhost:8081/api/v1.0/moviebooking/movies/search/" + searchKeyword);
+    return this.http.get<any>(this.apiEndPoint + "movies/search/" + searchKeyword);
   }
   addMovieTickets(ticketPojo: NewTicketsPojo) {
     const headersOb = new HttpHeaders({
@@ -31,7 +31,7 @@ export class ApiService {
     const httpOptions = {
       headers: headersOb
     };
-    return this.http.post<any>("http://localhost:8081/api/v1.0/moviebooking/" + ticketPojo.movieName + "/add", ticketPojo, httpOptions);
+    return this.http.post<any>(this.apiEndPoint + ticketPojo.movieName + "/add", ticketPojo, httpOptions);
   }
   authenticateAdmin() {
     const headersOb = new HttpHeaders({
@@ -41,7 +41,7 @@ export class ApiService {
     const httpOptions = {
       headers: headersOb
     };
-    return this.http.get<any>("http://localhost:8081/api/v1.0/moviebooking/admin", httpOptions);
+    return this.http.get<any>(this.apiEndPoint + "admin", httpOptions);
   }
   authenticateUser() {
     const headersOb = new HttpHeaders({
@@ -51,7 +51,7 @@ export class ApiService {
     const httpOptions = {
       headers: headersOb
     };
-    return this.http.get<any>("http://localhost:8081/api/v1.0/moviebooking/user", httpOptions);
+    return this.http.get<any>(this.apiEndPoint + "user", httpOptions);
   }
   updateTicketStatus(data: Movie) {
     const headersOb = new HttpHeaders({
@@ -62,9 +62,19 @@ export class ApiService {
       headers: headersOb
     };
     const pojo = new NewTicketsPojo(data.movieIdentity.movieName, data.movieIdentity.theatreName, 0, data.bookedSeats);
-    return this.http.put<any>("http://localhost:8081/api/v1.0/moviebooking/" + data.movieIdentity.movieName + "/update", pojo, httpOptions);
+    return this.http.put<any>(this.apiEndPoint + data.movieIdentity.movieName + "/update", pojo, httpOptions);
   }
   forgotPassword(data: User) {
-    return this.http.post<any>("http://localhost:8081/api/v1.0/moviebooking/forgot/" + data.loginId, data);
+    return this.http.post<any>(this.apiEndPoint + "forgot/" + data.loginId, data);
+  }
+  addMovie(data: Movie) {
+    const headersOb = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.cookieService.get("jwtToken")
+    });
+
+    const httpOptions = {
+      headers: headersOb
+    };
+    return this.http.post<any>(this.apiEndPoint + "addMovie", data, httpOptions);
   }
 }
