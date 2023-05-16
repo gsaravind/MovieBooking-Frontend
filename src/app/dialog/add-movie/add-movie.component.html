@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Add New Movie</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="addMovieForm">
+    <mat-form-field class="example-full-width" appearance="outline" style="width: 100%; margin-top: 10px;">
+        <mat-label>Enter Movie Name</mat-label>
+        <input matInput placeholder="Movie name" formControlName="movieName">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="outline" style="width: 100%;">
+        <mat-label>Enter Theatre Name</mat-label>
+        <input matInput placeholder="Theatre name" formControlName="theatreName">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-stroked-button color="accent" cdkFocusInitial>Add Movie</button>
+</mat-dialog-actions>

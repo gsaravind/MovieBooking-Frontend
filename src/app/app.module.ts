@@ -23,6 +23,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ConfirmPopupComponent } from './dialog/confirm-popup/confirm-popup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AddMovieComponent } from './dialog/add-movie/add-movie.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     DashboardComponent,
     AddTicketDialogComponent,
     ConfirmPopupComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    AddMovieComponent
   ],
   imports: [
     BrowserModule,

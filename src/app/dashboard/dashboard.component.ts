@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddTicketDialogComponent } from '../dialog/add-ticket-dialog/add-ticket-dialog.component';
 import { CookieService } from 'ngx-cookie-service';
 import { ConfirmPopupComponent } from '../dialog/confirm-popup/confirm-popup.component';
+import { AddMovieComponent } from '../dialog/add-movie/add-movie.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -86,6 +87,17 @@ export class DashboardComponent implements OnInit {
     this.dialog.open(ConfirmPopupComponent, {
       width: '35%',
       data: val
+    }).afterClosed().subscribe({
+      next: (res) => {
+        if(res == "done") {
+          this.getAllMovies();
+        }
+      }
+    })
+  }
+  openAddMovie() {
+    this.dialog.open(AddMovieComponent, {
+      width: '35%'
     }).afterClosed().subscribe({
       next: (res) => {
         if(res == "done") {
