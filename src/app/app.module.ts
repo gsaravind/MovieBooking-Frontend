@@ -24,6 +24,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ConfirmPopupComponent } from './dialog/confirm-popup/confirm-popup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AddMovieComponent } from './dialog/add-movie/add-movie.component';
+import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,7 @@ import { AddMovieComponent } from './dialog/add-movie/add-movie.component';
     MatAutocompleteModule,
     MatStepperModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
