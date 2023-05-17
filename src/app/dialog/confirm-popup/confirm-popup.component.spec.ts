@@ -74,8 +74,8 @@ describe('ConfirmPopupComponent', () => {
 
   it('should call ngOnInit and does not throw any error', () => {
     component.ngOnInit();
-    expect(component.addTickets).toBeDefined
-    expect(component.movie).toBeDefined
+    expect(component.addTickets).toBeDefined()
+    expect(component.movie).toBeDefined()
   })
 
   it('should not able to update ticket status because backend throw error while adding movie', () => {
