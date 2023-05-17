@@ -18,7 +18,7 @@ describe('ConfirmPopupComponent', () => {
     const apiServiceSpy = jasmine.createSpyObj<ApiService>(['authenticateAdmin', 'updateTicketStatus']);
     const toastServiceSpy = jasmine.createSpyObj<NgToastService>(['success', 'warning']);
 
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       imports: [MatDialogModule],
       declarations: [ConfirmPopupComponent],
       providers: [{ provide: MatDialogRef, useValue: dialogRefSpy },
