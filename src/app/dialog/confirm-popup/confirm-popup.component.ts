@@ -28,11 +28,14 @@ export class ConfirmPopupComponent implements OnInit {
       this.apiService.authenticateAdmin().subscribe({
         next: (res) => {
           this.apiService.updateTicketStatus(this.movie).subscribe({
-            next: (res) => this.toastService.success({
-              detail: "Success",
-              summary: res.message,
-              duration: 3000
-            }),
+            next: (res) => {
+              this.toastService.success({
+                detail: "Success",
+                summary: res.message,
+                duration: 3000
+              })
+              this.dialogRef.close("done");
+            },
             error: (res) => console.log(res)
           })
         },
@@ -42,9 +45,10 @@ export class ConfirmPopupComponent implements OnInit {
             summary: "You are not authorized as Admin",
             duration: 3000
           })
+          this.dialogRef.close("done");
         }
       })
     }
-    this.dialogRef.close("done");
+
   }
 }
