@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ApiService {
   constructor(private http: HttpClient, private cookieService: CookieService) { }
-  apiEndPoint: string = "http://13.233.216.114:8081/api/v1.0/moviebooking/";
+  apiEndPoint: string = "http://localhost:8081/api/v1.0/moviebooking/";
   login(data: any) {
     return this.http.post<any>(this.apiEndPoint + "login", data);
   }
